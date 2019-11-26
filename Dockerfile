@@ -128,7 +128,8 @@ ARG gid=1000
 ENV LANG en_US.UTF-8
 ENV HOME /home/${user}
 # Skip groupadd if it already exists
-RUN groupadd -g ${gid} ${group} | true \
+RUN id
+RUN groupadd -g ${gid} ${group} \
 && useradd -c "User" -d $HOME -u ${uid} -g ${gid} -m ${user} \
 && adduser ${user} sudo \
 && sed -i 's/%sudo	ALL=(ALL:ALL) ALL/%sudo	ALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
